@@ -14,7 +14,7 @@ const Index: React.FC = (): JSX.Element => {
           <div className="grid grid-cols-4 gap-4 mt-4">
             <Card title="product" total={23} color="bg-gray-700" />
             <Card title="product" total={23} color="bg-green-700" />
-            <Card title="product" total={23} color= "bg-orange-700" />
+            <Card title="product" total={23} color="bg-orange-700" />
             <Card title="product" total={23} color="bg-blue-700" />
           </div>
         </div>
