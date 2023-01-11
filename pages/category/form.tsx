@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { CategoryForm } from "../../components/form/category.form";
 import { networkErrorHandeller, setToken } from "../../utils/helpers";
 import { CategoryCreateNetwork } from "../../network/category.network";
-
+import { Toastify } from "../../components/toastify";
 
 const CreateUpdate: React.FC = (): JSX.Element => {
   const router = useRouter();
@@ -14,6 +14,8 @@ const CreateUpdate: React.FC = (): JSX.Element => {
     try {
       ///setLoading(true);
       const response = await CategoryCreateNetwork(data);
+      console.log('response', response);
+      
       if (response && response.status === 201) {
           console.log(response);
           Toastify.Success(response.data.message);

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useController } from "react-hook-form";
+import Select from "react-select";
 
 interface IRFields {
   label: string;
@@ -15,6 +16,20 @@ interface IRFields {
   rows?: number;
   type?: "text" | "number" | "email" | "password";
 }
+
+interface IRSelectFields {
+  label: string;
+  name: string;
+  control: any;
+  isClearable?: boolean;
+  error: any;
+  defaultvalue: OptionTypes | null;
+  placeholder: string;
+  rules: any;
+  options: OptionTypes[];
+  onSelected?: (data: any) => void;
+}
+
 
 type OptionTypes = {
   _id?: string;
@@ -60,3 +75,66 @@ export const TextInput: React.FC<IRFields> = (props: IRFields): JSX.Element => {
   );
 };
 
+
+const customStyles = (error: boolean) => {
+  const myStyles = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      minHeight: 58,
+      fontSize: 14,
+      color: "#000",
+      background: "#fff",
+      boxShadow: "none",
+      "&:hover": { borderColor: "1px solid #fff" },
+      border: error ? "1px solid red" : "1px solid #dfdfdf",
+      borderRadius: 0,
+    }),
+  };
+  return myStyles;
+};
+
+/* Single select field */
+export const SingleSelect: React.FC<IRSelectFields> = (
+  props: IRSelectFields
+): JSX.Element => {
+  const {
+    field: { onChange, onBlur, value },
+  } = useController({
+    name: props.name,
+    control: props.control,
+    rules: { ...props.rules },
+    defaultValue: props.defaultvalue,
+  });
+
+  const handleSelect = (event: any) => {
+    onChange(event);
+    props.onSelected?.(event);
+  };
+
+  return (
+    <div>
+      {props.error ? (
+        <p className="text-sm mb-1 text-danger">{props.error}</p>
+      ) : (
+        <p className="text-sm mb-1 text-gray-500">{props.label}</p>
+      )}
+
+      <Select
+        classNamePrefix={`custom-select`}
+        onBlur={onBlur} // notify when input is touched/blur
+        value={value} // input value
+        name={props.name} // send down the input name
+        styles={customStyles(props.error)}
+        components={{
+          DropdownIndicator: () => null,
+          IndicatorSeparator: () => null,
+        }}
+        options={props.options}
+        onChange={handleSelect}
+        isClearable={props.isClearable}
+        defaultValue={props.defaultvalue ? { ...props.defaultvalue } : null}
+        placeholder={props.placeholder}
+      />
+    </div>
+  );
+};

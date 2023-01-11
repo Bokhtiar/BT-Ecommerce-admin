@@ -13,6 +13,10 @@ export const CategoryIndexNetwork = async (reqParams: IndexParamsTypes) => {
   });
 }; 
 
+export const CategoryList = async()=> {
+  return await privateRequest.get(`api/v1/admin/category`)
+}
+
 
 
 /* store request */
