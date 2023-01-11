@@ -6,6 +6,7 @@ import { CategoryDestroyNetwork, CategoryIndexNetwork } from "../../network/cate
 import { ICategory } from "../../types/category.types";
 import { IRDataColumns } from "../../types/datatable.types";
 import { networkErrorHandeller } from "../../utils/helpers";
+import { Toastify } from "../../components/toastify";
 
 const Index: React.FC = (): JSX.Element => {
   const [data, setData] = useState<ICategory[] | []>([]);
@@ -102,7 +103,8 @@ const Index: React.FC = (): JSX.Element => {
 
   /* destory */
   const destroy = async(_id:string) => {
-    await CategoryDestroyNetwork({_id});
+    const response =  await CategoryDestroyNetwork({ _id });
+      Toastify.Success(response.data.message);
     return fetchData();
   };
 
