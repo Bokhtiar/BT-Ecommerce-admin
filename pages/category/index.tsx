@@ -87,7 +87,7 @@ const Index: React.FC = (): JSX.Element => {
       minWidth: "130px",
       cell: (row) => (
         <div className="flex gap-1">
-          <Link href={`/dashboard/jobs/show/${row._id}`}>
+          <Link href={`/category/${row._id}`}>
             <PrimaryButton name="show"></PrimaryButton>
           </Link>
 
@@ -103,7 +103,7 @@ const Index: React.FC = (): JSX.Element => {
   /* destory */
   const destroy = async(_id:string) => {
     await CategoryDestroyNetwork({_id});
-    return fetchData()
+    return fetchData();
   };
 
   return (

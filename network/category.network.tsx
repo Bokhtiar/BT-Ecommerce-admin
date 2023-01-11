@@ -25,7 +25,12 @@ type LoginDataType = {
 export const CategoryCreateNetwork = async (data: LoginDataType) => {
   return await privateRequest.post(`/api/v1/admin/category`, data);
 };
- 
+
+/* show category */
+export const CategoryShowNetwork = async ({ _id }: { _id: string }) => {
+  return await privateRequest.get(`/api/v1/admin/category/${_id}`);
+};
+
 
 /* category destroy network */
 export const CategoryDestroyNetwork = async ({ _id }: { _id: string }) => {

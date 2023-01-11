@@ -58,7 +58,7 @@ export const CategoryForm: React.FC<PropsTypes> = (
 
         <TextInput
           label="Category image"
-          name="image"
+          name="banner_image"
           type="text"
           placeholder="category image"
           className=""
