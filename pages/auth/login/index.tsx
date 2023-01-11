@@ -22,7 +22,7 @@ const Login: React.FC = (): JSX.Element => {
       const response = await login(data);
       if (response && response.status === 200) {
         await setToken(response.data.token);
-        router.push("/");
+        router.push("/dashboard");
       }
       setLoading(false);
     } catch (error: any) {
@@ -35,7 +35,7 @@ const Login: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (getToken()) {
-      router.push("/");
+      router.push("/dashboard");
     }
   }, [router]); 
 
