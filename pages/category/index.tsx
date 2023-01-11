@@ -2,7 +2,10 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { PrimaryButton } from "../../components/button";
 import { DataTable } from "../../components/table";
-import { CategoryDestroyNetwork, CategoryIndexNetwork } from "../../network/category.network";
+import {
+  CategoryDestroyNetwork,
+  CategoryIndexNetwork,
+} from "../../network/category.network";
 import { ICategory } from "../../types/category.types";
 import { IRDataColumns } from "../../types/datatable.types";
 import { networkErrorHandeller } from "../../utils/helpers";
@@ -14,7 +17,7 @@ const Index: React.FC = (): JSX.Element => {
   const [perPage, setPerPage] = useState<number>(10);
   const [totalRows, setTotalRows] = useState<number>(0);
 
-  /* Fetch data */ 
+  /* Fetch data */
   const fetchData = useCallback(
     async (page: number) => {
       try {
@@ -100,11 +103,10 @@ const Index: React.FC = (): JSX.Element => {
     },
   ];
 
-
   /* destory */
-  const destroy = async(_id:string) => {
-    const response =  await CategoryDestroyNetwork({ _id });
-      Toastify.Success(response.data.message);
+  const destroy = async (_id: string) => {
+    const response = await CategoryDestroyNetwork({ _id });
+    Toastify.Success(response.data.message);
     return fetchData();
   };
 

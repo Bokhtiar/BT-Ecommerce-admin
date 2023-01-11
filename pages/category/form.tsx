@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { CategoryForm } from "../../components/form/category.form";
 import { networkErrorHandeller, setToken } from "../../utils/helpers";
 import { CategoryCreateNetwork } from "../../network/category.network";
-c
+
 
 const CreateUpdate: React.FC = (): JSX.Element => {
   const router = useRouter();

@@ -5,8 +5,8 @@ import Card from '../components/card'
 const Index: React.FC = (): JSX.Element => {
   return (
     <div>
-      <Header />
-      <div className='flex gap-4'>
+      {/* <Header /> */}
+      {/* <div className='flex gap-4'>
         <div className='w-[20%]'>
           <Sidebar />
         </div>
@@ -18,7 +18,7 @@ const Index: React.FC = (): JSX.Element => {
             <Card title="product" total={23} color="bg-blue-700" />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
