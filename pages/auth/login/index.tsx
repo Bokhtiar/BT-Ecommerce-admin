@@ -1,23 +1,30 @@
-import authRoute from "../../../hook/authRouter";
-import LoginForm from "../../../components/form/login.form";
+import { LoginForm } from "../../../components/form/login.form";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getToken, networkErrorHandeller, setToken } from "../../../utils/helpers";
+import {
+  getToken,
+  networkErrorHandeller,
+  setToken,
+} from "../../../utils/helpers";
+import { login } from "../../../network/auth.network";
+
 
 const Login: React.FC = (): JSX.Element => {
-    const router = useRouter();
-    const [isLoading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   /* Handle login */
   const handleLogin = async (data: any) => {
     try {
       setLoading(true);
-    //   const response = await NetworkServices.Authentication.login(data);
-    //   if (response && response.status === 200) {
-    //     await setToken(response.data.token);
-    //     router.push("/dashboard");
-    //   }
-    //   setLoading(false);
+      console.log(data);
+      
+      const response = await login(data);
+      if (response && response.status === 200) {
+        await setToken(response.data.token);
+        router.push("/");
+      }
+      setLoading(false);
     } catch (error: any) {
       if (error) {
         setLoading(false);
@@ -28,11 +35,16 @@ const Login: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (getToken()) {
-        router.push("/dashboard");
+      router.push("/");
     }
-  }, [router]);
+  }, [router]); 
 
-    return <LoginForm loading={isLoading} onSubmit={(data) => handleLogin(data)}></LoginForm>
-}
+  return (
+    <LoginForm
+      loading={isLoading}
+      onSubmit={(data) => handleLogin(data)}
+    ></LoginForm>
+  );
+};
 
-export default Login; 
+export default Login;
