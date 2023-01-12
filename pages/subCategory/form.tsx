@@ -3,6 +3,7 @@ import { useState } from "react";
 import SubCategoryForm from "../../components/form/subCategory.form"
 import { Toastify } from "../../components/toastify";
 import { CategoryShowNetwork } from "../../network/category.network";
+import { SubCategoryCreateNetwork } from "../../network/subCategory.network";
 import { networkErrorHandeller } from "../../utils/helpers";
 
 const SubCategoryFrom: React.FC = (): JSX.Element => {
@@ -10,13 +11,16 @@ const SubCategoryFrom: React.FC = (): JSX.Element => {
     const [isLoading, setLoading] = useState<boolean>(false);
     /* Handle login */
     const handleSubCategoryForm = async (data: any) => {
+        const formData = {
+            ...data,
+            category: data.category.value,
+          };
+        
         try {
             ///setLoading(true);
-            const response = await CategoryShowNetwork(data);
-            console.log('response', response);
-
+            const response = await SubCategoryCreateNetwork(formData);
             if (response && response.status === 201) {
-                console.log(response);
+                console.log("success response",response);
                 Toastify.Success(response.data.message);
                 router.push("/category");
             }

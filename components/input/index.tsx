@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useController } from "react-hook-form";
+import AsyncSelect from "react-select/async";
 import Select from "react-select";
 
 interface IRFields {
@@ -93,9 +94,24 @@ const customStyles = (error: boolean) => {
   return myStyles;
 };
 
-/* Single select field */
-export const SingleSelect: React.FC<IRSelectFields> = (
-  props: IRSelectFields
+
+interface IRSearchableSelectFields {
+  label: string;
+  name: string;
+  control: any;
+  isClearable?: boolean;
+  error: any;
+  defaultvalue: OptionTypes | null;
+  placeholder: string;
+  rules: any;
+  onSelected?: (data: any) => void;
+  onSearch: (data: any) => any;
+}
+
+
+/* ------------------------ Searchable Select field -------------------- */
+export const SearchableSelect: React.FC<IRSearchableSelectFields> = (
+  props: IRSearchableSelectFields
 ): JSX.Element => {
   const {
     field: { onChange, onBlur, value },
@@ -105,6 +121,17 @@ export const SingleSelect: React.FC<IRSelectFields> = (
     rules: { ...props.rules },
     defaultValue: props.defaultvalue,
   });
+
+  /* Search from API */
+  const searchOptions = (inputValue: string, callback: any) => {
+    props.onSearch(inputValue).then((results: OptionTypes) => {
+      if (results) {
+        setTimeout(() => {
+          callback(results);
+        }, 500);
+      }
+    });
+  };
 
   const handleSelect = (event: any) => {
     onChange(event);
@@ -119,21 +146,24 @@ export const SingleSelect: React.FC<IRSelectFields> = (
         <p className="text-sm mb-1 text-gray-500">{props.label}</p>
       )}
 
-      <Select
+      <AsyncSelect
         classNamePrefix={`custom-select`}
+        cacheOptions
         onBlur={onBlur} // notify when input is touched/blur
         value={value} // input value
         name={props.name} // send down the input name
         styles={customStyles(props.error)}
+        onChange={handleSelect}
+        loadOptions={searchOptions}
+        isClearable={props.isClearable}
+        defaultValue={props.defaultvalue ? { ...props.defaultvalue } : null}
+        placeholder={props.placeholder}
+        loadingMessage={() => "Searching ..."}
+        noOptionsMessage={() => "No results found !"}
         components={{
           DropdownIndicator: () => null,
           IndicatorSeparator: () => null,
         }}
-        options={props.options}
-        onChange={handleSelect}
-        isClearable={props.isClearable}
-        defaultValue={props.defaultvalue ? { ...props.defaultvalue } : null}
-        placeholder={props.placeholder}
       />
     </div>
   );

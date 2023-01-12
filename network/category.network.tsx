@@ -40,3 +40,11 @@ export const CategoryShowNetwork = async ({ _id }: { _id: string }) => {
 export const CategoryDestroyNetwork = async ({ _id }: { _id: string }) => {
   return await privateRequest.delete(`/api/v1/admin/category/${_id}`);
 };
+
+
+/* Search from resources */
+export const CategorySearch = async (query: string) => {
+  return await privateRequest.get(
+    `/api/v1/admin/category/?query=${query}`
+  );
+};
