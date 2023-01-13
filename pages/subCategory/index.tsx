@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
+import { Bradcrumbs } from "../../components/bradcrumbs";
 import { PrimaryButton } from "../../components/button";
 import { DataTable } from "../../components/table";
 import authRoute from "../../hook/authRouter";
@@ -9,31 +10,31 @@ import { ISubCategory } from "../../types/subCategory.types";
 import { networkErrorHandeller } from "../../utils/helpers";
 
 const Index: React.FC = (): JSX.Element => {
-    const [data, setData] = useState<ISubCategory[] | []>([])
-    const [isLoading, setLoading] = useState<boolean>(true);
-    const [perPage, setPerPage] = useState<number>(5);
-    const [totalRows, setTotalRows] = useState<number>(0);
+  const [data, setData] = useState<ISubCategory[] | []>([])
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [perPage, setPerPage] = useState<number>(5);
+  const [totalRows, setTotalRows] = useState<number>(0);
 
-    const fetchData = useCallback(async (page: number) => {
-        try {
-            const response = await SubCategoryIndexNetwork({
-                page,
-                limit: perPage
-            });
-            if (response && response.status === 200) {
-                console.log("subcategory", response);
-                setData(response?.data?.data)
-                setTotalRows(response?.data?.paginate?.total_items);
-            }
-        } catch (error: any) {
-            if (error) {
-                networkErrorHandeller(error)
-            }
-        }
-    }, [data])
+  const fetchData = useCallback(async (page: number) => {
+    try {
+      const response = await SubCategoryIndexNetwork({
+        page,
+        limit: perPage
+      });
+      if (response && response.status === 200) {
+        console.log("subcategory", response);
+        setData(response?.data?.data)
+        setTotalRows(response?.data?.paginate?.total_items);
+      }
+    } catch (error: any) {
+      if (error) {
+        networkErrorHandeller(error)
+      }
+    }
+  }, [data])
 
 
-    
+
   /* handle paginate page change */
   const handlePageChange = (page: number) => fetchData(page);
 
@@ -50,7 +51,7 @@ const Index: React.FC = (): JSX.Element => {
   };
 
 
-  
+
   /* data columns */
   const columns: IRDataColumns[] = [
     {
@@ -77,7 +78,7 @@ const Index: React.FC = (): JSX.Element => {
           <Link href={`/category/${row._id}`}>
             <PrimaryButton name="show"></PrimaryButton>
           </Link>
-{/* 
+          {/* 
           <button onClick={() => destroy(row._id)}>
             <PrimaryButton name="delete"></PrimaryButton>
           </button> */}
@@ -88,12 +89,9 @@ const Index: React.FC = (): JSX.Element => {
 
 
 
-    return (
-        <div>
-<div className="p-6 bg-white rounded-lg">
-      <p className="text-gray-700 text-2xl lg:text-3xl mb-1">All Category</p>
-      <p className="text-gray-400 text-sm mb-8 xl:mb-10"></p>
-
+  return (
+    <div>
+      <Bradcrumbs page_title="SubCategory List" another_page_title="subCategory create" another_page_link="/subCategory/form"></Bradcrumbs>
       <DataTable
         data={data}
         columns={columns}
@@ -105,8 +103,8 @@ const Index: React.FC = (): JSX.Element => {
         handlePageChange={handlePageChange}
         noDataMessage="No subCategory available."
       />
+
     </div>
-        </div>
-    )
+  )
 }
 export default authRoute(Index) 

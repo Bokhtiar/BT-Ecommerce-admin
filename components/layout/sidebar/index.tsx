@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const Index: React.FC = (): JSX.Element => {
     return (
         <aside className="shadow-md h-screen px-4">
@@ -8,7 +10,10 @@ const Index: React.FC = (): JSX.Element => {
                         <span className="material-symbols-outlined">home</span> <a href="">Dashboard</a>
                     </li>
                     <li className="py-2 flex gap-2 items-center text-gray-500 text-lg">
-                        <span className="material-symbols-outlined">category</span><a href="">Category</a>
+                        <span className="material-symbols-outlined">category</span><Link href="/category">Category</Link>
+                    </li>
+                    <li className="py-2 flex gap-2 items-center text-gray-500 text-lg">
+                        <span className="material-symbols-outlined">category</span><Link href="/subCategory">SubCategory</Link>
                     </li>
                     <li className="py-2 flex gap-2 items-center text-gray-500 text-lg">
                         <span className="material-symbols-outlined">home</span> <a href="">Dashboard</a>

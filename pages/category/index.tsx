@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { PrimaryButton } from "../../components/button";
 import { DataTable } from "../../components/table";
-import { 
+import {
   CategoryDestroyNetwork,
   CategoryIndexNetwork,
 } from "../../network/category.network";
@@ -10,6 +10,7 @@ import { ICategory } from "../../types/category.types";
 import { IRDataColumns } from "../../types/datatable.types";
 import { networkErrorHandeller } from "../../utils/helpers";
 import { Toastify } from "../../components/toastify";
+import { Bradcrumbs } from '../../components/bradcrumbs/index'
 
 const Index: React.FC = (): JSX.Element => {
   const [data, setData] = useState<ICategory[] | []>([]);
@@ -60,35 +61,31 @@ const Index: React.FC = (): JSX.Element => {
   const columns: IRDataColumns[] = [
     {
       name: "Icon",
-      maxWidth: "60px",
       cell: (row) => (
         <img
           src={row.icon}
-          alt="Company avatar"
-          className="w-[50px] h-[50px] rounded-full mx-auto"
+          alt="Category avatar"
+          className="w-[50px] h-[50px] rounded-full"
         />
       ),
     },
     {
       name: "image",
-      maxWidth: "60px",
       cell: (row) => (
         <img
           src={row.banner_image}
           alt="Company avatar"
-          className="w-[50px] h-[50px] rounded-full mx-auto"
+          className="w-[50px] h-[50px] rounded-full"
         />
       ),
     },
     {
       name: "Company",
-      maxWidth: "150px",
       selector: (row) => row.name,
     },
 
     {
       name: "Action",
-      minWidth: "130px",
       cell: (row) => (
         <div className="flex gap-1">
           <Link href={`/category/${row._id}`}>
@@ -112,8 +109,7 @@ const Index: React.FC = (): JSX.Element => {
 
   return (
     <div className="p-6 bg-white rounded-lg">
-      <p className="text-gray-700 text-2xl lg:text-3xl mb-1">All Category</p>
-      <p className="text-gray-400 text-sm mb-8 xl:mb-10"></p>
+      <Bradcrumbs page_title="Category List" another_page_title="Category Create" another_page_link="/category/form" ></Bradcrumbs>
 
       <DataTable
         data={data}

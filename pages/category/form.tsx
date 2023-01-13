@@ -4,6 +4,7 @@ import { CategoryForm } from "../../components/form/category.form";
 import { networkErrorHandeller, setToken } from "../../utils/helpers";
 import { CategoryCreateNetwork } from "../../network/category.network";
 import { Toastify } from "../../components/toastify";
+import { Bradcrumbs } from "../../components/bradcrumbs";
 
 const CreateUpdate: React.FC = (): JSX.Element => {
   const router = useRouter();
@@ -15,13 +16,13 @@ const CreateUpdate: React.FC = (): JSX.Element => {
       ///setLoading(true);
       const response = await CategoryCreateNetwork(data);
       console.log('response', response);
-      
+
       if (response && response.status === 201) {
-          console.log(response);
-          Toastify.Success(response.data.message);
-          router.push("/category");
+        console.log(response);
+        Toastify.Success(response.data.message);
+        router.push("/category");
       }
-     // setLoading(false);
+      // setLoading(false);
     } catch (error: any) {
       if (error) {
         //setLoading(false);
@@ -31,10 +32,14 @@ const CreateUpdate: React.FC = (): JSX.Element => {
   };
 
   return (
-    <CategoryForm
-      loading={isLoading}
-      onSubmit={(data) => handleCategoryForm(data)}
-    />
+    <>
+      <Bradcrumbs page_title="Category form" another_page_title="Category List" another_page_link="/category" ></Bradcrumbs>
+
+      <CategoryForm
+        loading={isLoading}
+        onSubmit={(data) => handleCategoryForm(data)}
+      />
+    </>
   );
 };
 export default CreateUpdate;
