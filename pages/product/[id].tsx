@@ -31,7 +31,7 @@ const ProductShow: React.FC = (): JSX.Element => {
     /* useEffect */
     useEffect(()=> {
         fetchData()
-    })
+    },[])
 
     return (
         <>

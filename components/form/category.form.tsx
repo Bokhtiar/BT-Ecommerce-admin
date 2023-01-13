@@ -18,7 +18,7 @@ export const CategoryForm: React.FC<PropsTypes> = (
 
   /* Handle form submit */
   const onSubmit = (data: any) => props.onSubmit(data);
-
+ 
   return (
     <div>
       <form action="" onSubmit={handleSubmit(onSubmit)}>

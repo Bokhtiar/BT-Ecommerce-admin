@@ -16,6 +16,8 @@ export const Index = async (reqParams: IndexParamsTypes) => {
 
 /* resource store */
 export const Store = async (data: IProductCreateUpdate) => {
+    console.log('cc', data);
+    
     return await privateRequest.post(`/api/v1/admin/product`, data)
 }
 

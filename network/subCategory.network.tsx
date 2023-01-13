@@ -35,3 +35,10 @@ export const SubCategoryShowNetwork = async ({ _id }: { _id: string }) => {
 export const SubCategoryDestroyNetwork = async({_id}: {_id: string}) => {
   return await privateRequest.delete(`/api/v1/admin/sub-category/${_id}`)
 }
+
+/* Search from resources */
+export const SubCategorySearch = async (query: string) => {
+  return await privateRequest.get(
+    `/api/v1/admin/sub-category/?query=${query}`
+  );
+};

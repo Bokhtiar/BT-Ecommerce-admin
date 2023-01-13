@@ -23,8 +23,8 @@ const ProductIndex: React.FC = (): JSX.Element => {
                 page,
                 limit: perPage,
             })
-            console.log("p",response);
-            
+            console.log("p", response);
+
             if (response && response.status === 200) {
                 setProduct(response?.data?.data);
                 setTotalRows(response?.data?.paginate?.total_items);
@@ -101,7 +101,12 @@ const ProductIndex: React.FC = (): JSX.Element => {
 
     return (
         <>
-            <Bradcrumbs page_title="Product List" another_page_title="Product Create" another_page_link="/product/form" ></Bradcrumbs>
+            <Bradcrumbs
+                page_title="Product List"
+                another_page_title="Product Create"
+                another_page_link="/product/create"
+            ></Bradcrumbs>
+            
             <DataTable
                 data={products}
                 columns={columns}

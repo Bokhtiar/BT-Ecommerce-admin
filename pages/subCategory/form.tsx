@@ -9,7 +9,8 @@ import { networkErrorHandeller } from "../../utils/helpers";
 const SubCategoryFrom: React.FC = (): JSX.Element => {
     const router = useRouter();
     const [isLoading, setLoading] = useState<boolean>(false);
-    /* Handle login */
+
+    /* Handle sub category store */
     const handleSubCategoryForm = async (data: any) => {
         const formData = {
             ...data,
