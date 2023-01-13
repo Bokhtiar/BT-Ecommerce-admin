@@ -53,9 +53,6 @@ const ProductIndex: React.FC = (): JSX.Element => {
         setLoading(false);
     };
 
-
-    
-
     /* data columns */
     const columns: IRDataColumns[] = [
         {
