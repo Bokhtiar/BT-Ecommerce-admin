@@ -3,8 +3,9 @@ import { useCallback, useState } from "react";
 import { Bradcrumbs } from "../../components/bradcrumbs";
 import { PrimaryButton } from "../../components/button";
 import { DataTable } from "../../components/table";
+import { Toastify } from "../../components/toastify";
 import authRoute from "../../hook/authRouter";
-import { SubCategoryIndexNetwork } from "../../network/subCategory.network";
+import { SubCategoryDestroyNetwork, SubCategoryIndexNetwork } from "../../network/subCategory.network";
 import { IRDataColumns } from "../../types/datatable.types";
 import { ISubCategory } from "../../types/subCategory.types";
 import { networkErrorHandeller } from "../../utils/helpers";
@@ -51,6 +52,12 @@ const Index: React.FC = (): JSX.Element => {
   };
 
 
+  /* destory subCategory */
+  const destroy = async(_id:string) => {
+   const response =  await SubCategoryDestroyNetwork({_id})
+    Toastify.Success(response.data.message);
+    return fetchData()
+  }
 
   /* data columns */
   const columns: IRDataColumns[] = [
@@ -75,13 +82,13 @@ const Index: React.FC = (): JSX.Element => {
       minWidth: "130px",
       cell: (row) => (
         <div className="flex gap-1">
-          <Link href={`/category/${row._id}`}>
+          <Link href={`/subCategory/${row._id}`}>
             <PrimaryButton name="show"></PrimaryButton>
           </Link>
-          {/* 
+          
           <button onClick={() => destroy(row._id)}>
             <PrimaryButton name="delete"></PrimaryButton>
-          </button> */}
+          </button>
         </div>
       ),
     },

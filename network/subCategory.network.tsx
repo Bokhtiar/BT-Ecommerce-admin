@@ -11,7 +11,7 @@ export const SubCategoryIndexNetwork = async (reqParams: IndexParamsTypes) => {
   return await privateRequest.get(`api/v1/admin/sub-category`, {
     params: { ...reqParams },
   });
-}; 
+};
 
 
 /* store request */
@@ -24,3 +24,13 @@ type SubCategoryDataType = {
 export const SubCategoryCreateNetwork = async (data: SubCategoryDataType) => {
   return await privateRequest.post(`/api/v1/admin/sub-category`, data);
 };
+
+/* subcategory show */
+export const SubCategoryShowNetwork = async ({ _id }: { _id: string }) => {
+  return await privateRequest.get(`/api/v1/admin/sub-category/${_id}`)
+}
+
+/* subCategory destroy */
+export const SubCategoryDestroyNetwork = async({_id}: {_id: string}) => {
+  return await privateRequest.delete(`/api/v1/admin/sub-category/${_id}`)
+}
