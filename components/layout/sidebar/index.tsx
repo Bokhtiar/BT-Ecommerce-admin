@@ -16,7 +16,7 @@ const Index: React.FC = (): JSX.Element => {
                         <span className="material-symbols-outlined">category</span><Link href="/subCategory">SubCategory</Link>
                     </li>
                     <li className="py-2 flex gap-2 items-center text-gray-500 text-lg">
-                        <span className="material-symbols-outlined">home</span> <a href="">Dashboard</a>
+                        <span className="material-symbols-outlined">home</span> <Link href="/product">Product</Link>
                     </li>
                     <li className="py-2 flex gap-2 items-center text-gray-500 text-lg">
                         <span className="material-symbols-outlined">category</span><a href="">Category</a>

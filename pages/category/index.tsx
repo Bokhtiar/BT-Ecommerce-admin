@@ -104,7 +104,7 @@ const Index: React.FC = (): JSX.Element => {
   const destroy = async (_id: string) => {
     const response = await CategoryDestroyNetwork({ _id });
     Toastify.Success(response.data.message);
-    return fetchData();
+    return fetchData()
   };
 
   return (

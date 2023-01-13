@@ -9,7 +9,7 @@ export type IndexParamsTypes = {
 };
 
 export const Index = async (reqParams: IndexParamsTypes) => {
-    return await privateRequest.get(`api/v1/admin/sub-category`, {
+    return await privateRequest.get(`api/v1/admin/product`, {
         params: { ...reqParams },
     });
 };
