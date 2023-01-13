@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react"
 import { Bradcrumbs } from "../../components/bradcrumbs"
 import { PrimaryButton } from "../../components/button"
 import { DataTable } from "../../components/table"
-import { Index } from "../../network/product.network"
+import { destory, Index } from "../../network/product.network"
 import { IRDataColumns } from "../../types/datatable.types"
 import { IProduct } from '../../types/product.types'
 import { networkErrorHandeller } from "../../utils/helpers"
@@ -89,13 +89,18 @@ const ProductIndex: React.FC = (): JSX.Element => {
                         <PrimaryButton name="show"></PrimaryButton>
                     </Link>
 
-                    {/* <button onClick={() => destroy(row._id)}>
+                    <button onClick={() => destroy(row._id)}>
                         <PrimaryButton name="delete"></PrimaryButton>
-                    </button> */}
+                    </button>
                 </div>
             ),
         },
     ];
+
+    const destroy = async(_id:string) => {
+        await destory({_id})
+        return fetchData()
+    }
 
 
 
