@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { PrimaryButton } from "../../components/button";
 import { DataTable } from "../../components/table";
-import {
+import { 
   CategoryDestroyNetwork,
   CategoryIndexNetwork,
 } from "../../network/category.network";
@@ -124,7 +124,7 @@ const Index: React.FC = (): JSX.Element => {
         totalRows={totalRows}
         handlePerRowsChange={handlePerRowsChange}
         handlePageChange={handlePageChange}
-        noDataMessage="No jobs available."
+        noDataMessage="No category available."
       />
     </div>
   );

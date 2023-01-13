@@ -13,7 +13,7 @@ export const DataTable: React.FC<IRDataTable> = (
         paddingTop: "10px",
         paddingBottom: "10px",
       },
-    },
+    }, 
   };
 
   return (

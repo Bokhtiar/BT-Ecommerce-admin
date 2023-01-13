@@ -22,7 +22,7 @@ const SubCategoryFrom: React.FC = (): JSX.Element => {
             if (response && response.status === 201) {
                 console.log("success response",response);
                 Toastify.Success(response.data.message);
-                router.push("/category");
+                router.push("/subCategory");
             }
             // setLoading(false);
         } catch (error: any) {
