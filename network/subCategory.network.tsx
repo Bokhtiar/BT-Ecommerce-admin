@@ -18,7 +18,8 @@ export const SubCategoryIndexNetwork = async (reqParams: IndexParamsTypes) => {
 type SubCategoryDataType = {
   name: string;
   icon: string;
-  image: string;
+  banner_image: string;
+  category: string
 };
 
 export const SubCategoryCreateNetwork = async (data: SubCategoryDataType) => {
