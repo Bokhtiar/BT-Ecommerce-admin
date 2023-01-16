@@ -37,8 +37,13 @@ type NetworkErrorType = {
 
 export const networkErrorHandeller = (error: any) => {
   console.log(error);
-  
-  if ( error && error.response && error.response.data && error.response.data.errors ) {
+
+  if (
+    error &&
+    error.response &&
+    error.response.data &&
+    error.response.data.errors
+  ) {
     error.response.data.errors.map((item: NetworkErrorType) => {
       console.log("helper", item.message);
       return Toastify.Error(item.message);
@@ -46,7 +51,6 @@ export const networkErrorHandeller = (error: any) => {
   } else {
     console.log("helper something went wrong");
     return Toastify.Error("Something going wrong, Try again.");
-    
   }
 };
 
@@ -57,43 +61,15 @@ export const arrayFromNumber = (data: number) => {
   return array;
 };
 
-/* Gender data */
-export const genderList = [
+/* Product type data */
+export const ProductType = [
   {
-    label: "Male",
-    value: "Male",
+    label: "Regular",
+    value: "regular",
   },
   {
-    label: "Female",
-    value: "Female",
-  },
-  {
-    label: "Other",
-    value: "Other",
-  },
-];
-
-/* Job type data */
-export const jobTypeList = [
-  {
-    label: "Full time",
-    value: "Full time",
-  },
-  {
-    label: "Part-time",
-    value: "Part-time",
-  },
-];
-
-/* salary type data */
-export const salaryTypeList = [
-  {
-    label: "Yearly",
-    value: "yearly",
-  },
-  {
-    label: "Monthly",
-    value: "monthly",
+    label: "Flash Sale",
+    value: "flash_sale",
   },
 ];
 
